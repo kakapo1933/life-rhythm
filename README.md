@@ -1,69 +1,78 @@
-# React + TypeScript + Vite
+# Life Rhythm
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A desktop application for managing personal tasks and tracking recurring events, built with Tauri, React, and TypeScript.
 
-Currently, two official plugins are available:
+## Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This application provides a native desktop experience for task management and event tracking with local data persistence through SQLite. The application follows a modern architecture with React 19+ frontend, Tauri backend, and Tailwind CSS for styling.
 
-## Expanding the ESLint configuration
+## Technology Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Frontend**: React 19+ with TypeScript
+- **Desktop Framework**: Tauri 2.x
+- **Styling**: Tailwind CSS
+- **Build Tool**: Vite
+- **Package Manager**: pnpm
+- **Database**: SQLite (local storage)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Project Structure
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+├── src/                    # React frontend source
+│   ├── components/         # React components
+│   │   ├── common/         # Reusable UI components
+│   │   ├── layout/         # Layout components
+│   │   └── features/       # Feature-specific components
+│   ├── hooks/              # Custom React hooks
+│   ├── types/              # TypeScript type definitions
+│   ├── utils/              # Utility functions
+│   └── services/           # API and service layer
+├── src-tauri/              # Tauri backend
+│   ├── src/                # Rust source code
+│   └── tauri.conf.json     # Tauri configuration
+├── docs/                   # Project documentation
+└── dist/                   # Build output
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Setup Instructions
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. **Prerequisites**:
+   - Node.js (v18+)
+   - Rust (latest stable)
+   - pnpm package manager
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2. **Installation**:
+   ```bash
+   # Install dependencies
+   pnpm install
+   
+   # Start development server
+   pnpm tauri dev
+   
+   # Build for production
+   pnpm tauri build
+   ```
+
+3. **Development**:
+   - Frontend runs on `http://localhost:5173`
+   - Tauri handles the desktop application wrapper
+   - Hot reload is enabled for both frontend and backend changes
+
+## Architecture
+
+The application follows a layered architecture:
+
+- **Presentation Layer**: React components with TypeScript
+- **Service Layer**: API abstraction and state management
+- **Backend Layer**: Tauri commands and Rust handlers
+- **Data Layer**: SQLite database with local persistence
+
+## Next Steps
+
+This initial setup provides the foundation for:
+- Task management functionality
+- Event tracking features
+- Local data persistence
+- Cross-platform desktop distribution
+
+See the implementation tasks in `.kiro/specs/personal-task-tracker/tasks.md` for detailed development roadmap.

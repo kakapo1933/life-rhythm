@@ -1,4 +1,4 @@
-# Personal Task Tracker
+# Life Rhythm
 
 A desktop application for managing personal tasks and tracking recurring events, built with Tauri, React, and TypeScript.
 
